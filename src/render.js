@@ -3,6 +3,10 @@ var Render = (function(){
     var container = document.getElementById('gamearea'),
         canvas = document.createElement('canvas'),
         ctx = canvas.getContext('2d'),
+		img = [],
+		imgLoaded = [],
+		imgCount = 2,
+		imgURL = 'img/',
         
     draw = {
     
@@ -73,9 +77,14 @@ var Render = (function(){
 			
 			// draw guy
 			pos = Game.Map.getVPRelative(Game.Map.state.guyX, Game.Map.state.guyY);
-			ctx.fillStyle = '#ff0000';
-			ctx.fillRect(pos.x,pos.y,32, 64);
+			//ctx.fillStyle = '#ff0000';
+			//ctx.fillRect(pos.x,pos.y,32, 64);
 			
+			var cell = Game.Map.state.guyCell,
+			glowCell = Game.Map.state.guyGlowCell;
+			
+			ctx.drawImage(img[1], 150 * cell,188* (2 * glowCell),150,188, pos.x,pos.y,150,188+5);
+			ctx.drawImage(img[0], 150 * cell,0,150,188, pos.x,pos.y,150,188+5);
 			
 			
 			// smart bar
@@ -143,7 +152,58 @@ var Render = (function(){
         
         
             draw[currentState]();
-        }
+        },
+		
+		loadImages : function(){
+			
+			var i = 0,tempImg;
+			while(i < imgCount){
+				
+				
+				imgLoaded[i] = false;
+				
+				tempImg = new Image();
+				(function(){
+				
+				    var index = i;
+				
+				    tempImg.addEventListener('load', function(){
+					
+					    imgLoaded[index] = true;
+					
+					    console.log('disco!');
+					
+				    });
+				
+				}());
+				
+				tempImg.src = imgURL + i + '.png';
+				img.push(tempImg);
+				
+				i++;
+			}
+			
+			
+		},
+		
+		loadCheck : function(){
+			
+			var i=0, loadCount=0;;
+			
+			while(i < imgCount){
+			
+			    if(imgLoaded[i]){
+					
+					loadCount++;
+					
+				}
+			
+			    i++;
+			}
+			
+			return loadCount / imgCount;
+			
+		}
         
     };
     

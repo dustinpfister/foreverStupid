@@ -1,11 +1,15 @@
 var Main = (function(){
 
-    var currentState = 'yearStart',
+    var currentState = 'load',
         
     start = function(){
    
         Game.startNew();
         Control.attachTo(Render.canvas);
+		
+		
+		Render.loadImages();
+		
         loop();
         
     },
@@ -14,6 +18,16 @@ var Main = (function(){
     
         load : function(){
         
+		    var loadPer = Render.loadCheck();
+		
+		    if(loadPer === 1){
+				
+				currentState = 'yearStart';
+				
+			}
+			
+			console.log(loadPer);
+		
         },
         
         yearStart : function(){
@@ -23,6 +37,18 @@ var Main = (function(){
 		hallway : function(){
 			
 			Game.Map.update();
+			
+			
+			if(Control.keys[68] || Control.keys[65]){
+				
+				Game.Map.guyMove();
+				
+			}else{
+				
+				Game.Map.guyRest();
+				
+			}
+			
 			
 			if(Control.keys[68]){
 				
@@ -34,7 +60,7 @@ var Main = (function(){
 				
 				
 				Game.Map.state.guyX -= 5;
-				
+	
 			}
 			
 			if(Control.keys[87]){
@@ -61,6 +87,16 @@ var Main = (function(){
 		},
 		
 		room : function(){
+			
+			if(Control.keys[68] || Control.keys[65]){
+				
+				Game.Map.guyMove();
+				
+			}else{
+				
+				Game.Map.guyRest();
+				
+			}
 			
 			if(Control.keys[68]){
 				

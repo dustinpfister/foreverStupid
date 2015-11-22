@@ -14,6 +14,10 @@ var Game = (function () {
 			
 			guyX : 320,
 			guyY : -256,
+			guyCell : 0,
+			guyCellUp : true,
+			guyGlowCell : 0,
+			guyGlowUp:true,
 			
 			doors : [800], // x cornets where a door is
 			timeout : true,
@@ -24,12 +28,39 @@ var Game = (function () {
 			
 			state : state,
 			
+			guyMove : function(){
+				
+				if(state.guyCellUp){
+				   
+				   state.guyCell++;
+				
+				}else{
+					
+					state.guyCell--;
+				}
+				
+				if(state.guyCell === 0 || state.guyCell === 5){
+					
+					state.guyCellUp = !state.guyCellUp;
+					
+				}
+				
+				
+			},
+			
+			guyRest : function(){
+				
+				state.guyCell = 0;
+				state.guyCellUp = true;
+				
+			},
+			
 			
 			setup : function(){
 				
 				state.vpX = 0;
 				state.vpY = 0;
-				state.guyX = 320;
+				state.guyX = 320 - 75;//320;
 				state.guyY = -256;
 				state.timeout = true;
 				
@@ -47,23 +78,35 @@ var Game = (function () {
 			
 			update : function(){
 				
+				if(state.guyGlowUp){
+				state.guyGlowCell++;
+				}else{
+					state.guyGlowCell--;
+					
+				}
+				
+				if(state.guyGlowCell === 3 || state.guyGlowCell === 0){
+					
+					state.guyGlowUp = !state.guyGlowUp;
+					
+				}
 				
 				// update guys position
 				
-				if(state.guyY < state.horizon - 64){
+				if(state.guyY < state.horizon - 188){
 					
 					state.guyY += 5;
 					
 				}
 				
-				if(state.guyY > state.horizon - 64){
+				if(state.guyY > state.horizon - 188){
 				
-				    state.guyY = state.horizon - 64;
+				    state.guyY = state.horizon - 188;
 				
 				}
 				
 				
-				if(state.guyY === state.horizon - 64 && state.timeout){
+				if(state.guyY === state.horizon - 188 && state.timeout){
 					
 					state.timeout = false;
 					state.startTime = new Date();
