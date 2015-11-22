@@ -1,7 +1,9 @@
 var Control = (function(){
 
 
-    var state = {
+    var keys = [],
+	
+	state = {
 		
 		load : function(){
         
@@ -9,13 +11,33 @@ var Control = (function(){
         
         yearStart : function(){
         
-		     Main.setState('run');
+		     Game.Map.setup();
+		     Main.setState('hallway');
 		
         },
+		
+		hallway : function(){
+			
+			
+			
+			console.log(Game.Map.getVPRelative(50,Game.Map.state.horizon));
+			
+		},
+		
+		room : function(){
+			
+			
+		},
         
         run : function(){
         
-		    if(Game.state.smart >= 1){
+		    
+			
+        },
+		
+		yearEnd : function(){
+			
+			if(Game.state.smart >= 1){
 				
 				Main.setState('graduate');
 				
@@ -25,13 +47,20 @@ var Control = (function(){
 		        Main.setState('yearStart');
 		
 		    }
-        }
+			
+		},
 		
+		graduate : function(){
+			
+			
+			
+		}
 		
 	};
 
     return {
     
+	    keys : keys,
         attachTo : function(dom){
         
             dom.addEventListener('mousedown', function(){
@@ -43,6 +72,19 @@ var Control = (function(){
                 
             
             });
+			
+			window.addEventListener('keydown', function(e){
+	
+	            console.log(e.keyCode);
+				keys[e.keyCode] = true;
+				
+			});
+			
+			window.addEventListener('keyup', function(e){
+				
+				keys[e.keyCode] = false;
+				
+			});
             
         }
     
