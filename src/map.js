@@ -39,7 +39,6 @@ var Map = (function () {
 			state.doorAt = [];
 			state.doors = [];
 
-			//state.doors.push(800);
 			this.placeDoors(5);
 
 		},

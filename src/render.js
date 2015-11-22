@@ -21,9 +21,18 @@ var Render = (function(){
             
             ctx.fillStyle = '#ffffff';
             ctx.textAlign = 'center';
-			ctx.font = '20px courier';
+			
+			ctx.textBaseline = 'top';
+			ctx.font = '80px arial';
+			ctx.fillText('Forever Stupid', 320, 30 );
+			
+			ctx.font = '15px arial';
+			ctx.fillText('By Dustin Pfister For the 2015 BGS Jam', 320, 140 );
+			
+			
+			ctx.font = '25px courier';
             ctx.fillText('Class of ' + Game.state.schoolYear + '?', 320, 240 );
-            ctx.fillText('click \/ touch to start', 320, 270);
+            ctx.fillText('click \/ touch to start school year.', 320, 270);
             
         },
 		
@@ -129,8 +138,9 @@ var Render = (function(){
             ctx.fillRect(0,0,canvas.width,canvas.height);
 			
 			ctx.fillStyle = '#000000';
+			ctx.font = '20px courier';
 			ctx.fillText('you failed! See you next year.', 320,220);
-			
+			ctx.fillText('click \/ touch to start next school year.', 320, 260);
 		},
 		
         run : function(){
@@ -155,6 +165,7 @@ var Render = (function(){
 			ctx.fillStyle = '#ffffff';
 			ctx.textAlign = 'center';
 			ctx.fillText('You Graduated High School! AGE: ' + Game.state.age, 320, 220);
+			
 			
 		}
     

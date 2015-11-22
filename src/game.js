@@ -14,9 +14,11 @@ var Game = (function () {
 			this.smartPoints = 0;
 			this.toGraduate = 1600;
 			this.startTime = new Date();
+	
+	        
 
 		},
-
+		
 		nextYear : function () {
 
 			this.year++;
@@ -25,7 +27,7 @@ var Game = (function () {
 
 			
 			this.startTime = new Date();
-			this.smart += 0.1;
+			//this.smart += 0.1;
 			if (this.smart > 1) {
 
 				this.smart = 1;
@@ -49,6 +51,12 @@ var Game = (function () {
 		nextYear : function () {
 
 			state.nextYear();
+		},
+		
+		
+		smartUp : function(){
+			
+			
 		}
 
 	};
