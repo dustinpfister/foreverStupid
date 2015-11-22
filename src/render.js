@@ -130,6 +130,12 @@ var Render = (function(){
 			ctx.drawImage(img[1], 150 * cell,188* (2 * glowCell),150,188, pos.x,pos.y,150,188+5);
 			ctx.drawImage(img[0], 150 * cell,0,150,188, pos.x,pos.y,150,188+5);
 			
+			// smart bar
+			ctx.fillStyle='#222222';
+			ctx.fillRect(10,10,150,10);
+			
+			ctx.fillStyle='#00ff00';
+			ctx.fillRect(10,10,150 * Game.state.smart,10);
 		},
         
 		yearEnd : function(){
@@ -142,7 +148,7 @@ var Render = (function(){
 			ctx.fillText('you failed! See you next year.', 320,220);
 			ctx.fillText('click \/ touch to start next school year.', 320, 260);
 		},
-		
+		/*
         run : function(){
         
             ctx.fillStyle = '#000000';
@@ -156,6 +162,7 @@ var Render = (function(){
             
             
         },
+		*/
 		
 		graduate : function(){
 			
