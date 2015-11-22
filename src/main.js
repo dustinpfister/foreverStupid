@@ -25,8 +25,7 @@ var Main = (function(){
 				currentState = 'yearStart';
 				
 			}
-			
-			console.log(loadPer);
+		
 		
         },
         
@@ -36,47 +35,47 @@ var Main = (function(){
 		
 		hallway : function(){
 			
-			Game.Map.update();
+			Map.update();
 			
 			
 			if(Control.keys[68] || Control.keys[65]){
 				
-				Game.Map.guyMove();
+				Map.guyMove();
 				
 			}else{
 				
-				Game.Map.guyRest();
+				Map.guyRest();
 				
 			}
 			
 			
 			if(Control.keys[68]){
 				
-				Game.Map.state.guyX += 5;
+				Map.state.guyX += 5;
 				
 			}
 			
 			if(Control.keys[65]){
 				
 				
-				Game.Map.state.guyX -= 5;
+				Map.state.guyX -= 5;
 	
 			}
 			
 			if(Control.keys[87]){
 				
-				if( typeof Game.Map.guyOverDoor() === 'number'){
+				if( typeof Map.guyOverDoor() === 'number'){
 					
-					Game.Map.roomSet();
+					Map.roomSet();
 					currentState = 'room';
 					
 				}
 				
 			}
 			
-			if(!Game.Map.state.timeout){
+			if(!Map.state.timeout){
 			    
-				if(new Date() - Game.Map.state.startTime >= 10000){
+				if(new Date() - Map.state.startTime >= 30000){
 					
 					currentState = 'yearEnd';
 					
@@ -88,32 +87,34 @@ var Main = (function(){
 		
 		room : function(){
 			
+			Map.roomUpdate();
+			
 			if(Control.keys[68] || Control.keys[65]){
 				
-				Game.Map.guyMove();
+				Map.guyMove();
 				
 			}else{
 				
-				Game.Map.guyRest();
+				Map.guyRest();
 				
 			}
 			
 			if(Control.keys[68]){
 				
-				Game.Map.state.guyX += 5;
+				Map.state.guyX += 5;
 				
 			}
 			
 			if(Control.keys[65]){
 				
 				
-				Game.Map.state.guyX -= 5;
+				Map.state.guyX -= 5;
 				
 			}
 			
-			if(!Game.Map.state.timeout){
+			if(!Map.state.timeout){
 			    
-				if(new Date() - Game.Map.state.startTime >= 10000){
+				if(new Date() - Map.state.startTime >= 30000){
 					
 					currentState = 'yearEnd';
 					

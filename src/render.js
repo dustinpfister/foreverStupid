@@ -5,7 +5,7 @@ var Render = (function(){
         ctx = canvas.getContext('2d'),
 		img = [],
 		imgLoaded = [],
-		imgCount = 2,
+		imgCount = 3,
 		imgURL = 'img/',
         
     draw = {
@@ -35,8 +35,8 @@ var Render = (function(){
 			countX = Math.floor(640 / size) + 2,
 			countY = Math.floor(480 / size) + 2,
 			
-			startX = size - Math.abs(Game.Map.state.vpX) % size,					
-			startY = size - Math.abs(Game.Map.state.vpY) % size,
+			startX = size - Math.abs(Map.state.vpX) % size,					
+			startY = size - Math.abs(Map.state.vpY) % size,
 			
 			i = 0,
 			i2 = 0,
@@ -66,22 +66,33 @@ var Render = (function(){
 			}
 			
 			// draw floor
-			pos = Game.Map.getVPRelative( 0,Game.Map.state.horizon);
-			ctx.fillStyle = '#00ffff';
+			pos = Map.getVPRelative( 0,Map.state.horizon);
+			ctx.fillStyle = '#2a2a2a';
 			ctx.fillRect(0,pos.y,640, 480 - pos.y);
 			
+			// draw wall
+			ctx.drawImage(img[2],pos.x,pos.y-200);
+			
 			// draw doors
-			pos = Game.Map.getVPRelative( Game.Map.state.doors[0],Game.Map.state.horizon-64);
-			ctx.fillStyle = '#ffffff';
-			ctx.fillRect(pos.x,pos.y,32, 64);
+			
+			var i=0, len = Map.state.doors.length;
+			while(i < len){
+			
+			    pos = Map.getVPRelative( Map.state.doors[i],Map.state.horizon-188);
+			    ctx.fillStyle = '#ffffff';
+			    ctx.fillRect(pos.x,pos.y,150, 188);
+				
+				i++;
+			
+			}
 			
 			// draw guy
-			pos = Game.Map.getVPRelative(Game.Map.state.guyX, Game.Map.state.guyY);
+			pos = Map.getVPRelative(Map.state.guyX, Map.state.guyY);
 			//ctx.fillStyle = '#ff0000';
 			//ctx.fillRect(pos.x,pos.y,32, 64);
 			
-			var cell = Game.Map.state.guyCell,
-			glowCell = Game.Map.state.guyGlowCell;
+			var cell = Map.state.guyCell,
+			glowCell = Map.state.guyGlowCell;
 			
 			ctx.drawImage(img[1], 150 * cell,188* (2 * glowCell),150,188, pos.x,pos.y,150,188+5);
 			ctx.drawImage(img[0], 150 * cell,0,150,188, pos.x,pos.y,150,188+5);
@@ -100,9 +111,15 @@ var Render = (function(){
 			ctx.fillStyle = '#000000';
             ctx.fillRect(0,0,canvas.width,canvas.height);
 			
-			pos = {x: Game.Map.state.guyX, y:Game.Map.state.guyY};
-			ctx.fillStyle = '#ff0000';
-			ctx.fillRect(pos.x,pos.y,32, 64);
+			pos = {x: Map.state.guyX, y:Map.state.guyY};
+			//ctx.fillStyle = '#ff0000';
+			//ctx.fillRect(pos.x,pos.y,32, 64);
+			
+			var cell = Map.state.guyCell,
+			glowCell = Map.state.guyGlowCell;
+			
+			ctx.drawImage(img[1], 150 * cell,188* (2 * glowCell),150,188, pos.x,pos.y,150,188+5);
+			ctx.drawImage(img[0], 150 * cell,0,150,188, pos.x,pos.y,150,188+5);
 			
 		},
         
@@ -110,6 +127,9 @@ var Render = (function(){
 			
 			ctx.fillStyle = '#ff0000';
             ctx.fillRect(0,0,canvas.width,canvas.height);
+			
+			ctx.fillStyle = '#000000';
+			ctx.fillText('you failed! See you next year.', 320,220);
 			
 		},
 		
@@ -170,8 +190,6 @@ var Render = (function(){
 				    tempImg.addEventListener('load', function(){
 					
 					    imgLoaded[index] = true;
-					
-					    console.log('disco!');
 					
 				    });
 				

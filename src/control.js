@@ -11,7 +11,7 @@ var Control = (function(){
         
         yearStart : function(){
         
-		     Game.Map.setup();
+		     Map.setup();
 		     Main.setState('hallway');
 		
         },
@@ -19,8 +19,6 @@ var Control = (function(){
 		hallway : function(){
 			
 			
-			
-			console.log(Game.Map.getVPRelative(50,Game.Map.state.horizon));
 			
 		},
 		
@@ -65,17 +63,12 @@ var Control = (function(){
         
             dom.addEventListener('mousedown', function(){
             
-			    console.log(Main.getState());
-			
                 state[Main.getState()]();
                 
-                
-            
             });
 			
 			window.addEventListener('keydown', function(e){
 	
-	            console.log(e.keyCode);
 				keys[e.keyCode] = true;
 				
 			});
